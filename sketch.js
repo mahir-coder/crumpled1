@@ -3,16 +3,16 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+var box1,box1s
+var ball
 
-function preload(){
 
-	
-}
 
 function setup() {
 	createCanvas(800, 700);
-	groundSprite = createSprite(width/2,height-30,width,10)
-	box1s = createSprite(60,60,60,50)
+	
+	
+	
 
 	engine = Engine.create();
 	world = engine.world;
@@ -20,21 +20,49 @@ function setup() {
 	//Create the Bodies Here.
 
 
-	Engine.run(engine);
-	box1 = Bodies.rectangle(box1s.x,box1s.y,box1s.width,box1s.height)
+	// Engine.run(engine);
+	box1 = Bodies.rectangle(585,570,10,60,{isStatic:true})
 	World.add(world,box1)
-	ground = Bodies.rectangle(groundSprite.x,groundSprite.y,groundSprite.width,groundSprite.height)
+	
+	box2 = Bodies.rectangle(630,587,100,10,{isStatic:true})
+	World.add(world,box2)
+	box3 = Bodies.rectangle(675	,570,10,60,{isStatic:true})
+	World.add(world,box3)
+	ground1 = Bodies.rectangle(400,600,800,15,{isStatic:true})
+	World.add(world,ground1)
+
+	ball = Bodies.circle(150,20,10,{isStatic:false,friction:1})
+	World.add(world,ball)
+	//.body pendulum
 
 }
 
 
 function draw() {
+  Engine.update(engine)
   rectMode(CENTER);
   background(0);
+	rect(box1.position.x,box1.position.y,10,60)
+ 
+   	rect(box2.position.x,box2.position.y,100,10)
+   	rect(box3.position.x,box3.position.y,10,60)
+     rect(ground1.position.x,ground1.position.y,800,15)
+
+  ellipse(ball.position.x,ball.position.y,20,20)
+  console.log("x: "+ball.position.x)
+  console.log(ball.position.y)
   
   drawSprites();
+  
  
 }
+function keyPressed(){
+	if(keyCode === UP_ARROW){
+		// console.log(ball)
+		// console.log(ball.position)
+		Matter.Body.applyForce(ball,ball.position,{x:1,y:-1})
 
+	}
+}
 
 
