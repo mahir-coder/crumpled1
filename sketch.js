@@ -50,7 +50,7 @@ function draw() {
 
   ellipse(ball.position.x,ball.position.y,20,20)
   console.log("x: "+ball.position.x)
-  console.log(ball.position.y)
+  console.log(ball.position.y) 
   
   drawSprites();
   
@@ -60,7 +60,7 @@ function keyPressed(){
 	if(keyCode === UP_ARROW){
 		// console.log(ball)
 		// console.log(ball.position)
-		Matter.Body.applyForce(ball,ball.position,{x:1,y:-1})
+		Matter.Body.applyForce(ball,ball.position,{x:0.012,y:-0.012})
 
 	}
 }
